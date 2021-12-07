@@ -1,25 +1,16 @@
 #include "std_lib_facilities.h"
 
 //declare global variables here
-//number token
-const char number = '8';
-//quit token
-const char quit   = 'q';
-//print token
-const char print  = ';';
-//name token
-const char name   = 'a';
-//token to let the user change the value of a variable
 const char let    = 'L';
-//const token
+const char quit   = 'q';
+const char print  = ';';
+const char number = '8';
+const char name   = 'a';
 const char con    = 'C';
-//let keyword
 const string declkey = "let";
-//const keyword
 const string constkey = "const";
-const string prompt  = "> ";
-//= sign declaration to indicate a result will be entered
-const string result  = "= ";
+const string prompt  = "enter-> ";
+const string result  = "result = ";
 
 class Token {
 public:
@@ -55,8 +46,7 @@ Token_stream::Token_stream()
 {
 }
 
-void Token_stream::putback(Token t)
-{
+void Token_stream::putback(Token t){
     //display error message
     if (full) error ("trying to put back into a full buffer");
     //copy token to buffer
@@ -65,8 +55,7 @@ void Token_stream::putback(Token t)
     full = true;
 }
 
-Token Token_stream::get()
-{
+Token Token_stream::get(){
     //read user input and build a token
     //check if there is a token ready
     if (full) {
@@ -115,8 +104,7 @@ Token Token_stream::get()
     }
 }
 
-void Token_stream::ignore(char c)
-{
+void Token_stream::ignore(char c){
     //check buffer
     if (full && c==buffer.kind) {
         full = false;
@@ -130,7 +118,7 @@ void Token_stream::ignore(char c)
         if (ch==c) return;
 }
 
-Token_stream ts;        // provides get() and putback() 
+Token_stream ts;
 
 class Variable {
 public:
@@ -142,16 +130,14 @@ public:
 
 vector<Variable> var_table;
 
-double get_value(string s)
-{
+double get_value(string s){
     //get the value of the variable names
     for (int i = 0; i<var_table.size(); ++i)
         if (var_table[i].name == s) return var_table[i].value;
     error("trying to get undefined variable ", s);
 }
 
-void set_value(string s, double d)
-{
+void set_value(string s, double d){
     //set the value of the variable to d
     for (int i = 0; i<var_table.size(); ++i)
         if (var_table[i].name == s) {
@@ -162,17 +148,15 @@ void set_value(string s, double d)
     error("trying to set undefined variable ", s);
 }
 
-bool is_declared(string var)
+bool is_declared(string var){
     //check if the variable already in the table
-{
     for (int i = 0; i<var_table.size(); ++i)
         if (var_table[i].name == var) return true;
     return false;
 }
 
-double define_name(string s, double val, bool var=true)
+double define_name(string s, double val, bool var=true){
     //add the truple to the table
-{
     if (is_declared(s)) error(s," was declared twice");
     var_table.push_back(Variable(s,val,var));
     return val;
@@ -180,8 +164,7 @@ double define_name(string s, double val, bool var=true)
 
 double expression();
 
-double primary()
-{
+double primary(){
     Token t = ts.get();
     switch (t.kind) {
     case '(':
@@ -218,8 +201,7 @@ double primary()
     }
 }
 
-double term()
-{
+double term(){
     double left = primary();
     //get next token from stream
     Token t = ts.get();
@@ -255,8 +237,7 @@ double term()
     }
 }
 
-double expression()
-{
+double expression(){
     //read input
     double left = term();
     //get next token from stream
@@ -283,10 +264,9 @@ double expression()
     }
 }
 
-double declaration(Token k)
+double declaration(Token k){
     //deal with = expression
     //set a variable 'name' to 'expression'
-{
     Token t = ts.get();
     if (t.kind != name) error ("name expected in declaration");
     string var_name = t.name;
@@ -299,8 +279,7 @@ double declaration(Token k)
     return d;
 }
 
-double statement()
-{
+double statement(){
     Token t = ts.get();
     switch (t.kind) {
     case let:
@@ -312,13 +291,11 @@ double statement()
     }
 }
 
-void clean_up_mess()
-{ 
+void clean_up_mess(){ 
     ts.ignore(print);
 }
 
-void calculate()
-{
+void calculate(){
     while (cin)
       try {
         cout << prompt;

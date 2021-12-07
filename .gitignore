@@ -1,0 +1,4 @@
+# Project exclude paths
+/.vscode
+/target
+main.exe

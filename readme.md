@@ -4,6 +4,7 @@ HOW TO SET A VARIABLE VALUE:
 
 >An example of how to create a variable called y with the value 2 is:<br />
 >>Enter 'let y = 2;'
+
 <br /><br />
 
 HOW TO PERFORM AN OPERATION:
@@ -11,15 +12,23 @@ HOW TO PERFORM AN OPERATION:
 >An example, if you want to multiply x * y is: <br />
 >>Enter 'x*y;'
 
+<br /><br />
+
 HOW TO DECLARE A CONSTANT VARIABLE:
 >As an example of how to create a constant variable called s with the value 4 is:<br />
 >>Enter 'const s = 4;'
 
+<br /><br />
+
 THE MEANING OF 'Enter->':
 >When prompted Enter->, you are expected to enter some declaration.
 
+<br /><br />
+
 THE MEANING OF 'Bad token':
 >You have entered an invalid token name. Try a different name.
+
+<br /><br />
 
 HOW TO EXIT THE PROGRAM:
 >When prompted Enter->, you can enter 'q'. When asked for 'Enter a character to exit', enter 'q' again.
